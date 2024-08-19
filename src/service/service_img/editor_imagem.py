@@ -10,8 +10,8 @@ class EditorImagem:
         self.__caminho_base = os.getcwd()
         self.__caminho_imagem = os.path.join(
             self.__caminho_base, 'docs', 'certificado_padrao.jpg')
-        self.__imagem_padrao = self.abrir_imagem()
-        self.__desenhar = ImageDraw.Draw(self.__imagem_padrao)
+        self.__imagem_padrao = None
+        self.__desenhar = None
         self.__fonte_titulo = ImageFont.truetype(os.path.join(
             self.__caminho_base, 'fontes', 'ubuntu_title', 'Ubuntu-Title.ttf'), 90)
         self.__fonte_geral = ImageFont.truetype(os.path.join(os.path.join(
@@ -20,7 +20,8 @@ class EditorImagem:
             self.__caminho_base, 'fontes', 'ubuntu_titling_rg',  'UbuntuTitling-Bold.ttf')), 55)
 
     def abrir_imagem(self):
-        return Image.open(self.__caminho_imagem)
+        self.__imagem_padrao = Image.open(self.__caminho_imagem)
+        self.__desenhar = ImageDraw.Draw(self.__imagem_padrao)
 
     def gerar_cooordenada(self, indice: int) -> Tuple[int]:
         match indice:
@@ -46,5 +47,8 @@ class EditorImagem:
     def salvar_imagem(self, nome_arquivo: str):
         caminho_salvar_imagem = os.path.join(
             self.__caminho_base, 'imagens_geradas', f'{nome_arquivo}.png')
+
         self.__imagem_padrao.save(caminho_salvar_imagem)
+
+    def fechar_imagem(self):
         self.__imagem_padrao.close()
