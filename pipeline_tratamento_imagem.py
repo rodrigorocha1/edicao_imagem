@@ -1,15 +1,49 @@
-from src.service.dados.arquivo_planilha import Arquivo
-
-from typing import Union
+from src.service.dados.arquivo import Arquivo
+from src.service.dados.arquivo_planilha import ArquivoPlanilha
+from src.service.service_img.editor_imagem import EditorImagem
+from unidecode import unidecode
+from time import sleep
 
 
 class PipelineTratamentoImagem:
-    def __init__(self, arquivo: Arquivo) -> None:
+    def __init__(self, arquivo: Arquivo, servico_imagem: EditorImagem) -> None:
         self.__arquivo = arquivo
+        self.__servico_imagem = servico_imagem
 
     def rodar_pipeline_imagem(self):
         for dados in self.__arquivo.listar_dados():
-            print(dados)
+            nome_arquivo_imagem_curso = dados[0]
+            nome_arquivo_participandte = dados[1]
+            nome_participante_tratado = unidecode(
+                nome_arquivo_participandte.lower().replace(' ', '_'))
+            nome_curso_tratado = unidecode(
+                nome_arquivo_imagem_curso.lower().replace(' ', '_'))
+            nome_arquivo_salvar_imagem = f'{nome_curso_tratado}_{nome_participante_tratado}'
+            print(nome_arquivo_salvar_imagem)
+            for indice,  dado in enumerate(dados):
+                print(indice, dado)
+                self.__servico_imagem.abrir_imagem()
+                coordenada = self.__servico_imagem.gerar_cooordenada(
+                    indice=indice)
+                coordenada_x = coordenada[0]
+                coordenada_y = coordenada[1]
+                self.__servico_imagem.desenhar_imagem(
+                    coordenada_x=coordenada_x, coordenada_y=coordenada_y, valor=dado
+
+                )
+
+            self.__servico_imagem.salvar_imagem(
+                nome_arquivo=nome_arquivo_salvar_imagem)
+
+            sleep(2)
 
 
 if __name__ == '__main__':
+    pti = PipelineTratamentoImagem(
+        arquivo=ArquivoPlanilha(
+            nome_arquivo='planilha_alunos.xlsx'
+        ),
+        servico_imagem=EditorImagem()
+
+    )
+    pti.rodar_pipeline_imagem()

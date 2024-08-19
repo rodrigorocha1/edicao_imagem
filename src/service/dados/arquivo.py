@@ -6,12 +6,12 @@ import os
 
 class Arquivo(IDados, ABC):
     def __init__(self, nome_arquivo) -> None:
-        self.__caminho_base = os.getcwd()
-        self.__nome_arquivo = nome_arquivo
-        self.__caminho_arquivo = os.path.join(
-            self.__caminho_base,
+        self._caminho_base = os.getcwd()
+        self._nome_arquivo = nome_arquivo
+        self._caminho_arquivo = os.path.join(
+            self._caminho_base,
             'docs',
-            self.__nome_arquivo)
+            self._nome_arquivo)
 
     @abstractmethod
     def listar_dados(self) -> Generator[Tuple[str], None, None]:
