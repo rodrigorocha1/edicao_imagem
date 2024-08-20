@@ -40,7 +40,8 @@ if __name__ == '__main__':
     pti = PipelineTratamentoImagem(
         arquivo=ArquivoPlanilha(
             nome_arquivo='dados_ficticios.xlsx',
-            servico_imagem=EditorImagem()
-        )
+
+        ),
+        servico_imagem=EditorImagem()
     )
     pti.rodar_pipeline_imagem()
