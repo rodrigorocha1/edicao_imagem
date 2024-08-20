@@ -5,9 +5,9 @@ from unidecode import unidecode
 
 
 class PipelineTratamentoImagem:
-    def __init__(self, arquivo: Arquivo,) -> None:
+    def __init__(self, arquivo: Arquivo, servico_imagem: EditorImagem) -> None:
         self.__arquivo = arquivo
-        self.__servico_imagem = EditorImagem()
+        self.__servico_imagem = servico_imagem
 
     def rodar_pipeline_imagem(self):
         for dados in self.__arquivo.listar_dados():
@@ -39,7 +39,8 @@ class PipelineTratamentoImagem:
 if __name__ == '__main__':
     pti = PipelineTratamentoImagem(
         arquivo=ArquivoPlanilha(
-            nome_arquivo='dados_ficticios.xlsx'
+            nome_arquivo='dados_ficticios.xlsx',
+            servico_imagem=EditorImagem()
         )
     )
     pti.rodar_pipeline_imagem()
