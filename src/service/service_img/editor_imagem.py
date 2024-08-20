@@ -30,7 +30,7 @@ class EditorImagem:
             case 0:
                 return 420, 648
             case 1:
-                return 654, 480
+                return 700, 480
             case 2:
                 return 500, 695
             case 3:
