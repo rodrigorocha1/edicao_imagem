@@ -40,4 +40,4 @@ Uma demonstração em vídeo do programa pode ser encontrada no seguinte link: [
 
 Execute o código abaixo
 
-`python 3.10 pipeline_tratamento_imagem.py`
+`python3.10 pipeline_tratamento_imagem.py`
