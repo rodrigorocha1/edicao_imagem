@@ -36,3 +36,8 @@ Para esta demonstração, foi utilizado um certificado genérico gerado no Canva
 ## 5. Demonstração do Programa
 
 Uma demonstração em vídeo do programa pode ser encontrada no seguinte link: [Projeto: Edição de Imagem com python]([https://www.youtube.com/watch?v=VwYqakOB4ow](https://youtu.be/Bx9Vhj5DiCU)).
+
+
+Execute o código abaixo
+
+`python 3.10 pipeline_tratamento_imagem.py`
