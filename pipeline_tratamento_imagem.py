@@ -2,7 +2,6 @@ from src.service.dados.arquivo import Arquivo
 from src.service.dados.arquivo_planilha import ArquivoPlanilha
 from src.service.service_img.editor_imagem import EditorImagem
 from unidecode import unidecode
-from time import sleep
 
 
 class PipelineTratamentoImagem:
@@ -23,8 +22,6 @@ class PipelineTratamentoImagem:
             imagem = self.__servico_imagem
             imagem.abrir_imagem()
             for indice,  dado in enumerate(dados):
-                print(indice, dado)
-
                 coordenada = imagem.gerar_cooordenada(
                     indice=indice)
                 coordenada_x = coordenada[0]
@@ -32,7 +29,8 @@ class PipelineTratamentoImagem:
                 imagem.desenhar_imagem(
                     coordenada_x=coordenada_x,
                     coordenada_y=coordenada_y,
-                    valor=dado
+                    valor=dado,
+                    indice=indice
                 )
             imagem.salvar_imagem(nome_arquivo=nome_arquivo_salvar_imagem)
             imagem.fechar_imagem()
@@ -41,7 +39,7 @@ class PipelineTratamentoImagem:
 if __name__ == '__main__':
     pti = PipelineTratamentoImagem(
         arquivo=ArquivoPlanilha(
-            nome_arquivo='planilha_alunos.xlsx'
+            nome_arquivo='dados_ficticios.xlsx'
         )
     )
     pti.rodar_pipeline_imagem()
